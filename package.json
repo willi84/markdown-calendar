@@ -1,0 +1,7 @@
+{
+  "name": "markdown-calendar",
+  "type": "module",
+  "scripts": {
+    "build": "node generate-ics.js"
+  }
+}
