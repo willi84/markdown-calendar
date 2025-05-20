@@ -60,5 +60,9 @@ ics += `COMMENT:Generated at ${buildTimestamp}
 END:VCALENDAR`;
 
 fs.mkdirSync('docs', { recursive: true });
-fs.writeFileSync('docs/calendar.ics', ics);
+// Setze alle Zeilenenden auf \r\n laut RFC 5545
+const icsWithCRLF = ics.replace(/\r?\n/g, '\r\n');
+fs.writeFileSync('docs/calendar.ics', icsWithCRLF, 'utf8');
+
+
 console.log('✅ ICS-Datei unter docs/calendar.ics generiert.');
