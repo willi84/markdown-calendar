@@ -1,23 +1,23 @@
-name: Build ICS for Pages
+name: Build & Deploy ICS
 
 on:
   push:
+    branches: [main]
     paths:
       - 'events.md'
       - 'generate-ics.js'
-      - '.github/workflows/build-ics.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-
     steps:
-      - name: Checkout Repo
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -25,13 +25,26 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install dependencies
+        run: npm install
+
       - name: Generate ICS
         run: node generate-ics.js
 
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/
+          path: docs
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v3
+        id: deployment
+        uses: actions/deploy-pages@v4
