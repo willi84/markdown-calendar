@@ -1,4 +1,4 @@
-## 2025-06-01 10:00–12:00
+## 2025-06-01 10:00–13:00
 🧑‍🏫 Workshop: Smart City Ideen testen  
 Ort: Raum 1.OG / Coconat
 
