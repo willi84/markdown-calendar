@@ -1,35 +1,36 @@
-name: Build ICS from Markdown
+name: Build ICS for Pages
 
 on:
   push:
     paths:
       - 'events.md'
-      - '.github/workflows/**'
       - 'generate-ics.js'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout Repo
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install dependencies
-        run: npm install
 
       - name: Generate ICS
         run: node generate-ics.js
 
-      - name: Commit updated ICS
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/calendar.ics
-          git commit -m "🔄 Auto-update calendar.ics [CI]" || echo "No changes"
-          git push
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: docs/
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v3
