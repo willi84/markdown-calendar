@@ -2,6 +2,6 @@
 🧑‍🏫 Workshop: Smart City Ideen testen  
 Ort: Raum 1.OG / Coconat
 
-## 2025-06-03 18:30–20:00
+## 2025-06-04 18:30–20:00
 📢 Infoabend: Verkehr & Mobilität  
-Ort: Kiezladen Adlershof
+Ort: Kiezclub Adlershof
