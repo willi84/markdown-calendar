@@ -5,6 +5,7 @@ on:
     paths:
       - 'events.md'
       - 'generate-ics.js'
+      - '.github/workflows/build-ics.yml'
 
 jobs:
   build:
